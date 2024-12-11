@@ -24,7 +24,7 @@ function loaderAnimation() {
     delay: 1,
     ease: Power3.easeInOut,
   })
-    .to(".parent .child", {
+    .to("nav .parent .child", {
       y: "-100%",
       duration: 1,
       delay: 1.5,
@@ -50,11 +50,21 @@ function loaderAnimation() {
     });
 }
 
-gsap.from("g path", {
-  strokeDasharray: 64.68521881103516,
-  strokeOffset: 64.68521881103516,
-  duration: 1,
-  ease: Power3,
-});
+function animateSvg() {
+  document.querySelectorAll("#Visual>g").forEach(function (e) {
+    var character = e.childNodes[1].childNodes[1];
+    character.style.strokeDasharray = character.getTotalLength() + "px";
+    character.style.strokeDashoffset = character.getTotalLength() + "px";
+  });
+
+  // gsap.to("#Visual>g>g>path", {
+  //   strokeDashoffset: 0,
+  //   duration: 2,
+  //   ease: Expo.easeInOut,
+  //   delay: 2,
+  // });
+}
+
 revealToSpan();
 loaderAnimation();
+animateSvg();
