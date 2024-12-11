@@ -1,4 +1,17 @@
 let tl = gsap.timeline();
+function valueSetters() {
+  gsap.set(".nav a , .button", {
+    y: "-100%",
+    opacity: 0,
+  });
+  gsap.set(".home span .child", {
+    y: "100%",
+  });
+  gsap.set(".home .row img", {
+    opacity: 0,
+    x: -50,
+  });
+}
 
 function revealToSpan() {
   document.querySelectorAll(".reveal").forEach(function (elem) {
@@ -17,14 +30,14 @@ function revealToSpan() {
 }
 
 function loaderAnimation() {
-  tl.from(".child span", {
+  tl.from(".loader .child span", {
     x: 547,
     duration: 2,
     stagger: 0.2,
     delay: 1,
     ease: Power3.easeInOut,
   })
-    .to("nav .parent .child", {
+    .to(".loader .parent .child", {
       y: "-100%",
       duration: 1,
       delay: 1.5,
@@ -47,24 +60,33 @@ function loaderAnimation() {
       duration: 1,
       delay: -0.4,
       ease: Circ.easeInOut,
+      onComplete: function () {
+        animateHomepage();
+      },
     });
 }
 
-function animateSvg() {
-  document.querySelectorAll("#Visual>g").forEach(function (e) {
-    var character = e.childNodes[1].childNodes[1];
-    character.style.strokeDasharray = character.getTotalLength() + "px";
-    character.style.strokeDashoffset = character.getTotalLength() + "px";
-  });
+function animateHomepage() {
+  var tl = gsap.timeline();
 
-  // gsap.to("#Visual>g>g>path", {
-  //   strokeDashoffset: 0,
-  //   duration: 2,
-  //   ease: Expo.easeInOut,
-  //   delay: 2,
-  // });
+  tl.to(".nav a, .button", {
+    y: 0,
+    opacity: 1,
+    stagger: 0.5,
+    ease: Expo.easeInOut,
+  })
+    .to(".home .parent .child", {
+      y: 0,
+      stagger: 0.1,
+      duration: 2,
+      ease: Expo.easeInOut,
+    })
+    .to(".home .row img", {
+      opacity: 1,
+      ease: Expo.easeInOut,
+    });
 }
 
 revealToSpan();
+valueSetters();
 loaderAnimation();
-animateSvg();
