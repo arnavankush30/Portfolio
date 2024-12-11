@@ -15,36 +15,46 @@ function revealToSpan() {
     elem.appendChild(parent);
   });
 }
-revealToSpan();
 
-tl.from(".child span", {
-  x: 547,
-  duration: 2,
-  stagger: 0.2,
-  delay: 1,
-  ease: Power3.easeInOut,
-})
-  .to(".parent .child", {
-    y: "-100%",
-    duration: 1,
-    delay: 1.5,
-    ease: Circ.easeInOut,
+function loaderAnimation() {
+  tl.from(".child span", {
+    x: 547,
+    duration: 2,
+    stagger: 0.2,
+    delay: 1,
+    ease: Power3.easeInOut,
   })
-  .to(".loader", {
-    height: 0,
-    duration: 1,
-    ease: Circ.easeInOut,
-  })
-  .to(".green", {
-    height: "100%",
-    top: 0,
-    duration: 1,
-    delay: -1,
-    ease: Circ.easeInOut,
-  })
-  .to(".green", {
-    height: 0,
-    duration: 1,
-    delay: -0.4,
-    ease: Circ.easeInOut,
-  });
+    .to(".parent .child", {
+      y: "-100%",
+      duration: 1,
+      delay: 1.5,
+      ease: Circ.easeInOut,
+    })
+    .to(".loader", {
+      height: 0,
+      duration: 1,
+      ease: Circ.easeInOut,
+    })
+    .to(".green", {
+      height: "100%",
+      top: 0,
+      duration: 1,
+      delay: -1,
+      ease: Circ.easeInOut,
+    })
+    .to(".green", {
+      height: 0,
+      duration: 1,
+      delay: -0.4,
+      ease: Circ.easeInOut,
+    });
+}
+
+gsap.from("g path", {
+  strokeDasharray: 64.68521881103516,
+  strokeOffset: 64.68521881103516,
+  duration: 1,
+  ease: Power3,
+});
+revealToSpan();
+loaderAnimation();
